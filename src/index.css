@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+@theme {
+  /* $100 Bill crisp green */
+  --color-teal-50: #ffffff;
+  --color-teal-100: #e2ede8;
+  --color-teal-200: #d4af37;
+  --color-teal-300: #ffd700;
+  --color-teal-400: #154734; /* Official $100 Dark Green */
+  --color-teal-500: #154734; 
+  --color-teal-550: #154734;
+  --color-teal-600: #154734; 
+  --color-teal-620: #154734;
+  --color-teal-650: #154734;
+  --color-teal-700: #154734;
+  --color-teal-800: #154734;
+  --color-teal-900: #000000;
+  --color-teal-950: #000000;
+
+  --color-emerald-50: #ffffff;
+  --color-emerald-100: #e2ede8;
+  --color-emerald-200: #d4af37;
+  --color-emerald-300: #ffd700;
+  --color-emerald-400: #154734;
+  --color-emerald-450: #154734;
+  --color-emerald-500: #154734;
+  --color-emerald-600: #154734;
+  --color-emerald-700: #154734;
+  --color-emerald-800: #000000;
+  --color-emerald-950: #000000;
+
+  --color-green-50: #ffffff;
+  --color-green-100: #e2ede8;
+  --color-green-200: #d4af37;
+  --color-green-300: #ffd700;
+  --color-green-400: #154734;
+  --color-green-500: #154734;
+  --color-green-600: #154734;
+  --color-green-700: #154734;
+
+  /* Premium gold tokens */
+  --color-gold: #d4af37;
+  --color-gold-hover: #ffd700;
+  --color-gold-muted: #b8860b;
+}
+
+/* 1. Global Background: PURE WHITE, Main Text: $100 Bill Dark Green */
+body, html, #root {
+  background-color: #ffffff !important;
+  color: #154734 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Force all layout panels, content cards, views and details to render with pure white backgrounds */
+div, section, main, article, header, footer, aside, td, th {
+  background-color: #ffffff !important;
+}
+
+/* Force all text elements to be official treasury crisp green */
+h1, h2, h3, h4, h5, h6, p, span, label, li, td, th, strong, small, a {
+  color: #154734 !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+/* Force inputs, selections, and textareas to have white background, green text, and gold border */
+input, select, textarea {
+  background-color: #ffffff !important;
+  color: #154734 !important;
+  border: 1.5px solid #d4af37 !important;
+}
+
+/* 2. OUTLINE OF EVERYTHING: PURE GOLD (#d4af37) */
+*,
+.border,
+.border-t,
+.border-b,
+.border-l,
+.border-r,
+.border-2,
+.border-slate-100,
+.border-slate-200,
+.border-slate-250,
+.border-slate-300,
+.border-slate-755,
+.border-slate-800,
+.border-slate-850,
+.border-slate-700/30,
+.border-slate-700/60,
+.border-slate-800/80,
+.border-slate-100/50,
+.border-teal-100,
+.border-teal-200,
+.border-teal-700/30,
+.border-emerald-500/20,
+.border-emerald-200,
+.border-blue-150,
+.border-red-200,
+.border-red-100,
+.border-blue-100,
+.border-white/10 {
+  border-color: #d4af37 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+
+/* 3. SOLID PURE BLACK ACCENT NODES: buttons, active items, badge icons */
+button,
+a.button {
+  background-color: #000000 !important;
+  color: #d4af37 !important;
+  border: 1.5px solid #d4af37 !important;
+}
+
+/* Ensure green text color inside black components is brilliantly crisp and clear */
+button *,
+a.button * {
+  color: #d4af37 !important;
+}
+
+/* SVGs mapped to $100 Green and Gold */
+svg {
+  color: #154734 !important;
+  stroke: #154734 !important;
+}
+
+svg.text-amber-500,
+svg.text-amber-400,
+svg.text-yellow-400,
+svg.text-gold,
+.text-[#ffd700],
+.text-[#d4af37] {
+  color: #d4af37 !important;
+  stroke: #d4af37 !important;
+}
+
+/* Dynamic status pings and circles */
+.animate-ping,
+.bg-teal-450,
+.bg-teal-400,
+.bg-teal-300 {
+  background-color: #d4af37 !important;
+}
+
+/* Override all background gradient overlays to clean transparency/whites */
+.bg-gradient-to-r,
+.bg-gradient-to-b,
+.bg-gradient-to-tr,
+.from-teal-400,
+.to-white {
+  background: none !important;
+  background-color: #ffffff !important;
+}
+
+/* Shadow details updated with luxurious pure gold reflection hints */
+.shadow-sm,
+.shadow-md,
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 3px;
+}
+
+/* ==========================================================
+   AI AUTOPILOT CHATBOT AND PIPELINE CHAT TEXT VISIBILITY FIX
+   ========================================================== */
+
+/* Ensure the floating AI bot panel gets white background and gold borders */
+div.bg-slate-900.text-slate-100.border,
+.ai-console-header,
+.bg-slate-950,
+.bg-slate-900,
+.bg-slate-950\/45,
+.bg-slate-900\/60,
+.scrollbar-thin {
+  background-color: #ffffff !important;
+  color: #154734 !important;
+  border-color: #d4af37 !important;
+}
+
+/* Force both customer and automated prompt chat bubbles inside terminal/logs to have white backgrounds,
+   crisp gold outlines, and highly legible $100 bill deep green text */
+.bg-teal-600.text-white,
+.bg-teal-650,
+.bg-teal-600,
+.bg-\[\#1E293B\],
+.bg-blue-50,
+.bg-teal-50,
+.bg-slate-805,
+.bg-slate-800 {
+  background-color: #ffffff !important;
+  color: #154734 !important;
+  border: 1.5px solid #d4af37 !important;
+  border-radius: 12px !important;
+}
+
+/* Ensure all text nodes directly and indirectly in message logs are styled in treasury green */
+.flex-1.p-4.overflow-y-auto.space-y-3 *,
+.bg-teal-600 *,
+.text-slate-100,
+.text-white,
+.text-teal-400,
+.text-slate-450,
+.font-sans.leading-relaxed.text-left,
+.font-medium,
+.font-mono,
+div.whitespace-pre-wrap {
+  color: #154734 !important;
+  font-weight: 700 !important; /* Bold for maximal display contrast */
+}
+
+/* Neutralise any styling overrides trying to force text to be white or light gray in list containers */
+.flex-1.p-4.overflow-y-auto.space-y-3 span,
+.flex-1.p-4.overflow-y-auto.space-y-3 p,
+.flex-1.p-4.overflow-y-auto.space-y-3 select,
+.flex-1.p-4.overflow-y-auto.space-y-3 div {
+  color: #154734 !important;
+}
+
+/* Timestamps inside user chats */
+span.text-slate-500,
+.text-slate-450,
+span.font-mono {
+  color: rgba(21, 71, 52, 0.8) !important;
+}
+
+/* Specific styling for name labels and close buttons */
+.lucide-bot,
+.lucide-sparkles,
+.lucide-x,
+.lucide-loader2 {
+  color: #d4af37 !important;
+  stroke: #d4af37 !important;
+}
+
+/* Keep send buttons solid black (as requested: anything else is black) but with bright gold outline */
+button[type="submit"],
+.bg-teal-650 {
+  background-color: #000000 !important;
+  color: #d4af37 !important;
+  border: 1.5px solid #d4af37 !important;
+}
+
+button[type="submit"]:hover,
+.bg-teal-650:hover {
+  background-color: #154734 !important;
+  color: #ffffff !important;
+  border-color: #ffd700 !important;
+}
+
+/* Specific Gold overrides for See What I Can Do / Hide Guide */
+#gold-capability-toggle {
+  background-color: #d4af37 !important;
+  color: #000000 !important;
+  border: 2px solid #ffd700 !important;
+  font-weight: 800 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+#gold-capability-toggle * {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+#gold-capability-toggle:hover {
+  background-color: #ffd700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important;
+}
+

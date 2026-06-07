@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Deal Closer AI — Full Arsenal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#E2C47A;--gold-dim:#8a6f2e;
+  --black:#0A0A0A;--dark:#111111;--card:#161616;--card2:#1C1C1C;
+  --border:#2a2a2a;--text:#E8E2D6;--muted:#888;
+  --red:#e05252;--green:#52c48a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--black);color:var(--text);
+  font-family:'DM Sans',sans-serif;min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(201,168,76,.09) 0%,transparent 70%),
+    repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,168,76,.015) 80px,rgba(201,168,76,.015) 81px),
+    repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(201,168,76,.015) 80px,rgba(201,168,76,.015) 81px);
+}
+/* ── HEADER ── */
+header{text-align:center;padding:52px 20px 28px;}
+.crown{font-size:2.2rem;display:block;margin-bottom:8px;animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+header h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,5vw,3.5rem);font-weight:900;letter-spacing:-.02em;
+  background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 50%,var(--gold-dim) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;
+}
+header .subtitle{margin-top:10px;font-size:.77rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);font-weight:500;}
+.divider{width:110px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px auto;}
+/* ── NAV ── */
+.nav-wrap{width:100%;overflow-x:auto;padding:0 16px 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.nav-wrap::-webkit-scrollbar{display:none;}
+nav{display:flex;gap:5px;width:max-content;margin:0 auto;padding:4px;background:var(--card);border:1px solid var(--border);border-radius:14px;}
+nav button{
+  padding:9px 15px;border-radius:10px;border:none;background:transparent;
+  color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:500;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+nav button:hover{color:var(--gold-light);background:rgba(201,168,76,.06);}
+nav button.active{background:linear-gradient(135deg,rgba(201,168,76,.22),rgba(201,168,76,.07));color:var(--gold-light);border:1px solid rgba(201,168,76,.28);}
+/* ── MAIN ── */
+main{max-width:860px;margin:0 auto;padding:26px 16px 80px;}
+/* ── PANELS ── */
+.panel{display:none;}
+.panel.active{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* ── CARD ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.45;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:700;color:var(--gold-light);margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.card-desc{font-size:.82rem;color:var(--muted);margin-bottom:22px;line-height:1.65;}
+/* ── FORMS ── */
+.fl{display:block;font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px;margin-top:16px;}
+input[type=text],input[type=number],input[type=date],select,textarea{
+  width:100%;background:var(--card2);border:1px solid var(--border);border-radius:10px;
+  padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;
+  transition:border-color .2s;outline:none;appearance:none;-webkit-appearance:none;
+}
+input[type=text]:focus,input[type=number]:focus,input[type=date]:focus,select:focus,textarea:focus{border-color:rgba(201,168,76,.6);}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a6f2e' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+select option{background:var(--dark);}
+textarea{resize:vertical;min-height:88px;line-height:1.65;-webkit-appearance:none;}
+.ck-label{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.86rem;color:var(--text);margin-top:10px;}
+.ck-label input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;appearance:auto;-webkit-appearance:auto;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media(max-width:580px){.row2,.row3{grid-template-columns:1fr;}}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;border:none;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.03em;}
+.btn-gold{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dim) 100%);color:#000;width:100%;justify-content:center;margin-top:20px;font-size:.92rem;}
+.btn-gold:hover:not(:disabled){filter:brightness(1.13);transform:translateY(-1px);}
+.btn-gold:disabled{opacity:.42;cursor:not-allowed;transform:none;filter:none;}
+.btn-sm{padding:7px 14px;font-size:.73rem;background:rgba(201,168,76,.1);color:var(--gold-light);border:1px solid rgba(201,168,76,.22);border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;}
+.btn-sm:hover{background:rgba(201,168,76,.2);}
+/* ── STATS ── */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.stat-box{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;}
+.stat-lbl{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.stat-val{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold-light);}
+.stat-val.big{font-size:2rem;}
+.stat-val.green{color:var(--green);}
+/* ── LOADING ── */
+.lbox{display:none;text-align:center;padding:26px 0;}
+.lbox.show{display:block;}
+.spinner{width:30px;height:30px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .75s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lbox p{font-size:.8rem;color:var(--muted);}
+/* ── RESULTS ── */
+.section-result{margin-top:14px;border-radius:12px;background:var(--card2);border:1px solid var(--border);overflow:hidden;}
+.sr-head{padding:10px 16px;background:rgba(201,168,76,.055);border-bottom:1px solid var(--border);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);display:flex;justify-content:space-between;align-items:center;}
+.sr-body{padding:18px;font-size:.87rem;line-height:1.85;color:var(--text);word-break:break-word;white-space:pre-wrap;}
+/* ── EMAIL ── */
+.email-tabs{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap;}
+.etab{padding:7px 14px;border-radius:8px;font-size:.75rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.etab.active{background:rgba(201,168,76,.1);color:var(--gold-light);border-color:rgba(201,168,76,.3);}
+.email-box{margin-top:10px;background:var(--card2);border:1px solid rgba(201,168,76,.18);border-radius:12px;overflow:hidden;}
+.email-head{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04);}
+.email-head span{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);font-weight:600;}
+.email-body{padding:20px;font-size:.88rem;line-height:1.85;white-space:pre-wrap;color:var(--text);word-break:break-word;}
+/* ── DEADLINES ── */
+.dl-list{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.dl-item{display:flex;align-items:flex-start;gap:13px;padding:13px 16px;background:var(--card2);border:1px solid var(--border);border-radius:10px;transition:border-color .2s;}
+.dl-item:hover{border-color:rgba(201,168,76,.3);}
+.ddot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.dg{background:var(--green);}.da{background:var(--gold);}.dr{background:var(--red);}
+.dlabel{flex:1;font-size:.86rem;}
+.dnote{font-size:.72rem;color:var(--muted);margin-top:3px;}
+.dright{text-align:right;flex-shrink:0;}
+.ddate{font-size:.78rem;color:var(--gold-dim);font-family:'DM Mono',monospace;}
+.ddays{font-size:.71rem;color:var(--muted);margin-top:2px;}
+/* ── BADGE ── */
+.badge-new{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:rgba(82,196,138,.13);color:var(--green);border:1px solid rgba(82,196,138,.25);}
+/* ── MISC ── */
+.err-box{margin-top:16px;padding:14px 18px;background:rgba(224,82,82,.08);border:1px solid rgba(224,82,82,.25);border-radius:10px;font-size:.84rem;color:var(--red);line-height:1.65;}
+.warn-box{margin-top:14px;padding:14px 18px;background:rgba(224,82,82,.055);border:1px solid rgba(224,82,82,.18);border-radius:10px;font-size:.79rem;color:#e07a52;line-height:1.7;}
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:24px;background:var(--gold);color:#000;padding:10px 20px;border-radius:10px;font-size:.82rem;font-weight:700;opacity:0;pointer-events:none;transition:opacity .28s;z-index:9999;}
+#toast.show{opacity:1;}
+/* ── FOOTER ── */
+footer{text-align:center;padding:22px;font-size:.7rem;color:var(--muted);letter-spacing:.08em;}
+footer span{color:var(--gold-dim);}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="crown">⚜️</span>
+  <h1>THE DEAL CLOSER AI</h1>
+  <p class="subtitle">Full Arsenal Edition — 7 Power Tools for Elite Agents</p>
+  <div class="divider"></div>
+</header>
+
+<div class="nav-wrap">
+  <nav id="mainNav">
+    <button class="active" onclick="showPanel('commission',this)">💰 Commission</button>
+    <button onclick="showPanel('marketing',this)">📣 Marketing</button>
+    <button onclick="showPanel('offer',this)">🤝 Offer &amp; Counter</button>
+    <button onclick="showPanel('followup',this)">📧 Follow-Up</button>
+    <button onclick="showPanel('listing',this)">🏠 Listing Copy</button>
+    <button onclick="showPanel('openhouse',this)">🗝️ Open House</button>
+    <button onclick="showPanel('timeline',this)">📅 Deadlines</button>
+  </nav>
+</div>
+
+<main>
+
+<!-- ════════���═════════════════════════════════
+     PANEL 1 — COMMISSION CALCULATOR
+══════════════════════════════════════════ -->
+<div id="panel-commission" class="panel active">
+<div class="card">
+  <div class="card-title">👑 Commission Split &amp; Net Sheet Calculator</div>
+  <div class="card-desc">Know your exact take-home on every deal before you hang up the phone. No more back-of-napkin math on closing day.</div>
+
+  <label class="fl">Property Sale Price ($)</label>
+  <input type="number" id="salePrice" placeholder="e.g. 485000" min="0" oninput="calcCommission()"/>
+
+  <label class="fl">Total Commission Rate (%)</label>
+  <input type="number" id="commRate" placeholder="e.g. 6" step="0.1" min="0" max="100" oninput="calcCommission()"/>
+
+  <label class="fl">Commission Split — Listing Side (%)</label>
+  <div class="row2">
+    <div>
+      <input type="number" id="listSplit" placeholder="Listing agent % (e.g. 50)" step="1" min="0" max="100" oninput="calcCommission()"/>
+    </div>
+    <div>
+      <input type="number" id="buySplit" placeholder="Buyer agent % (e.g. 50)" step="1" min="0" max="100" oninput="calcCommission()"/>
+    </div>
+  </div>
+
+  <label class="fl">Your Agent-to-Broker Split (you keep %)</label>
+  <input type="number" id="agentSplit" placeholder="e.g. 80" step="1" min="0" max="100" oninput="calcCommission()"/>
+
+  <label class="fl">Transaction Fees &amp; Other Costs ($)</label>
+  <input type="number" id="fees" placeholder="e.g. 350" min="0" oninput="calcCommission()"/>
+
+  <div class="stat-grid">
+    <div class="stat-box"><div class="stat-lbl">Gross Commission</div><div class="stat-val big" id="grossComm">$0</div></div>
+    <div class="stat-box"><div class="stat-lbl">Your Side Gross</div><div class="stat-val" id="yourSideGross">$0</div></div>
+    <div class="stat-box"><div class="stat-lbl">After Broker Split</div><div class="stat-val" id="afterBroker">$0</div></div>
+    <div class="stat-box"><div class="stat-lbl">Your Net Take-Home</div><div class="stat-val green" id="netTakeHome">$0</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 2 — MARKETING ENGINE
+══════════════════════════════════════════ -->
+<div id="panel-marketing" class="panel">
+<div class="card">
+  <div class="card-title">📣 AI Marketing &amp; Strategy Engine</div>
+  <div class="card-desc">Full specialist package: SEO strategy, market pitch, buyer ROI angle, and viral social script — all generated at once.</div>
+
+  <label class="fl">Property Specs &amp; Key Assets</label>
+  <textarea id="mktSpecs" placeholder="e.g. 4BR/3BA, 2,200 sqft, renovated kitchen, pool, corner lot, new roof 2023, 3-car garage..."></textarea>
+
+  <label class="fl">Target Market / Neighborhood</label>
+  <input type="text" id="mktNeighborhood" placeholder="e.g. Buckhead Atlanta, first-time buyers, luxury investors..."/>
+
+  <label class="fl">Listing Price</label>
+  <input type="text" id="mktPrice" placeholder="e.g. $525,000"/>
+
+  <button class="btn btn-gold" id="mktBtn" onclick="runMarketing()">⚡ Generate Full Strategy Package</button>
+  <div class="lbox" id="mktLoading"><div class="spinner"></div><p>Crafting your specialist strategy...</p></div>
+  <div id="mktResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 3 — OFFER & COUNTER-OFFER
+══════════════════════════════════════════ -->
+<div id="panel-offer" class="panel">
+<div class="card">
+  <div class="card-title">🤝 Offer &amp; Counter-Offer Generator <span class="badge-new">NEW</span></div>
+  <div class="card-desc">Complete negotiation playbook + professional offer language in 30 seconds. Gives any agent the leverage of a 40-year veteran on every deal.</div>
+
+  <label class="fl">You Are Representing</label>
+  <select id="offerSide">
+    <option value="buyer">The Buyer</option>
+    <option value="seller">The Seller</option>
+  </select>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Asking / List Price ($)</label>
+      <input type="number" id="offerAsk" placeholder="e.g. 499000" min="0"/>
+    </div>
+    <div>
+      <label class="fl">Offer / Counter Price ($)</label>
+      <input type="number" id="offerPrice" placeholder="e.g. 472000" min="0"/>
+    </div>
+  </div>
+
+  <label class="fl">Property Address / Description</label>
+  <input type="text" id="offerAddr" placeholder="e.g. 142 Maple St — 3BR/2BA ranch, 90 days on market"/>
+
+  <label class="fl">Days on Market</label>
+  <input type="number" id="offerDOM" placeholder="e.g. 47" min="0"/>
+
+  <label class="fl">Contingencies</label>
+  <div class="row3" style="margin-top:8px;">
+    <label class="ck-label"><input type="checkbox" id="contInspect" checked/> Inspection</label>
+    <label class="ck-label"><input type="checkbox" id="contFinance" checked/> Financing</label>
+    <label class="ck-label"><input type="checkbox" id="contAppraisal" checked/> Appraisal</label>
+  </div>
+
+  <label class="fl">Seller Motivation Level</label>
+  <select id="offerMotivation">
+    <option value="unknown">Unknown — Not sure</option>
+    <option value="low">Low — Testing the market</option>
+    <option value="medium">Medium — Ready to move in 60–90 days</option>
+    <option value="high">High — Needs to close fast</option>
+    <option value="distressed">Distressed — Pre-foreclosure / divorce / estate</option>
+  </select>
+
+  <label class="fl">Closing Timeline</label>
+  <input type="text" id="offerClose" placeholder="e.g. 30 days, 45 days, flexible"/>
+
+  <label class="fl">Special Terms or Concessions</label>
+  <textarea id="offerTerms" style="min-height:72px" placeholder="e.g. seller pays closing costs, include appliances, leaseback 30 days, as-is..."></textarea>
+
+  <button class="btn btn-gold" id="offerBtn" onclick="runOffer()">⚔️ Generate Negotiation Strategy + Offer Language</button>
+  <div class="lbox" id="offerLoading"><div class="spinner"></div><p>Building your negotiation playbook...</p></div>
+  <div id="offerResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 4 — FOLLOW-UP EMAIL SEQUENCE
+══════════════════════════════════════════ -->
+<div id="panel-followup" class="panel">
+<div class="card">
+  <div class="card-title">📧 Client Follow-Up Email Sequence <span class="badge-new">NEW</span></div>
+  <div class="card-desc">Stop losing deals to silence. Get a personalized 5-email drip sequence for any lead type — ready for your CRM in 60 seconds.</div>
+
+  <label class="fl">Lead Type</label>
+  <select id="fuLeadType">
+    <option value="first_time_buyer">First-Time Buyer</option>
+    <option value="move_up_buyer">Move-Up Buyer (selling + buying)</option>
+    <option value="investor">Real Estate Investor</option>
+    <option value="relocating">Corporate Relocation</option>
+    <option value="downsizer">Empty Nester / Downsizer</option>
+    <option value="seller_lead">Potential Seller Lead</option>
+    <option value="open_house_visitor">Open House Visitor</option>
+    <option value="cold_lead">Cold Lead (30+ days no contact)</option>
+  </select>
+
+  <label class="fl">Client Name(s)</label>
+  <input type="text" id="fuName" placeholder="e.g. Marcus &amp; Tanya"/>
+
+  <label class="fl">Their Situation (more detail = better emails)</label>
+  <textarea id="fuSituation" placeholder="e.g. Pre-approved for $420K, looking in Midtown, saw 3 homes last week, price is main concern, lease ends in 4 months..."></textarea>
+
+  <label class="fl">Your Name &amp; Brokerage</label>
+  <input type="text" id="fuAgent" placeholder="e.g. Keisha Williams, KW Metro"/>
+
+  <label class="fl">Sequence Tone</label>
+  <select id="fuTone">
+    <option value="warm professional">Warm &amp; Professional</option>
+    <option value="direct with urgency">Direct with Urgency</option>
+    <option value="consultative advisor">Consultative / Advisor</option>
+    <option value="casual and friendly">Casual &amp; Friendly</option>
+  </select>
+
+  <button class="btn btn-gold" id="fuBtn" onclick="runFollowUp()">✉️ Generate 5-Email Drip Sequence</button>
+  <div class="lbox" id="fuLoading"><div class="spinner"></div><p>Writing your personalized sequence...</p></div>
+
+  <div id="fuResults" style="display:none;">
+    <div class="email-tabs" id="emailTabs"></div>
+    <div class="email-box">
+      <div class="email-head">
+        <span id="emailCounter">Email 1 of 5</span>
+        <button class="btn btn-sm" onclick="copyActiveEmail()">Copy Email</button>
+      </div>
+      <div class="email-body" id="emailBody"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 5 — LISTING DESCRIPTION
+══════════════════════════════════════════ -->
+<div id="panel-listing" class="panel">
+<div class="card">
+  <div class="card-title">🏠 Listing Description Generator <span class="badge-new">NEW</span></div>
+  <div class="card-desc">MLS-optimized listing copy with SEO scoring. Turn 60 seconds of input into a description that stops scrollers and pulls the right buyer in.</div>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Beds / Baths</label>
+      <input type="text" id="ldBedBath" placeholder="e.g. 4BD / 3.5BA"/>
+    </div>
+    <div>
+      <label class="fl">Square Footage</label>
+      <input type="number" id="ldSqft" placeholder="e.g. 2450" min="0"/>
+    </div>
+  </div>
+
+  <label class="fl">Property Type</label>
+  <select id="ldType">
+    <option value="Single Family Home">Single Family Home</option>
+    <option value="Condo / Townhome">Condo / Townhome</option>
+    <option value="Luxury Estate">Luxury Estate</option>
+    <option value="Investment / Multi-family">Investment / Multi-family</option>
+    <option value="Land / Lot">Land / Lot</option>
+    <option value="Commercial Property">Commercial Property</option>
+  </select>
+
+  <label class="fl">Top Features &amp; Upgrades (list everything)</label>
+  <textarea id="ldFeatures" placeholder="e.g. Renovated chef's kitchen, quartz counters, SS appliances, primary suite with spa bath, 3-car garage, resort-style pool, smart home, corner lot, new HVAC 2023, hardwood floors throughout..."></textarea>
+
+  <label class="fl">Neighborhood &amp; Location Selling Points</label>
+  <input type="text" id="ldLocation" placeholder="e.g. Top-rated schools, walk to downtown, 5 min from I-285, gated community..."/>
+
+  <label class="fl">Target Buyer</label>
+  <select id="ldBuyer">
+    <option value="Growing Families">Growing Families</option>
+    <option value="Young Professionals">Young Professionals</option>
+    <option value="Luxury Buyers">Luxury Buyers</option>
+    <option value="Investors">Investors / ROI Focus</option>
+    <option value="Retirees and Downsizers">Retirees / Downsizers</option>
+    <option value="First-Time Buyers">First-Time Buyers</option>
+  </select>
+
+  <label class="fl">Listing Price</label>
+  <input type="text" id="ldPrice" placeholder="e.g. $649,000"/>
+
+  <button class="btn btn-gold" id="ldBtn" onclick="runListing()">✍️ Generate MLS Listing + SEO Score</button>
+  <div class="lbox" id="ldLoading"><div class="spinner"></div><p>Crafting your listing masterpiece...</p></div>
+  <div id="ldResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 6 — OPEN HOUSE PLAYBOOK
+══════════════════════════════════════════ -->
+<div id="panel-openhouse" class="panel">
+<div class="card">
+  <div class="card-title">🗝️ Open House ROI &amp; Script Builder <span class="badge-new">NEW</span></div>
+  <div class="card-desc">Stop winging it. Get a budget breakdown, word-for-word agent script, lead qualification questions, and post-visit follow-up emails — before you arrive at the door.</div>
+
+  <label class="fl">Property Address &amp; Type</label>
+  <input type="text" id="ohAddr" placeholder="e.g. 318 Oak Blvd — 4BR colonial, $549K, Roswell GA"/>
+
+  <label class="fl">Top 5 Property Highlights</label>
+  <textarea id="ohHighlights" style="min-height:72px" placeholder="e.g. Just renovated, new roof, best school district in county, huge backyard, priced $30K below comps..."></textarea>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Open House Budget ($)</label>
+      <input type="number" id="ohBudget" placeholder="e.g. 500" min="0"/>
+    </div>
+    <div>
+      <label class="fl">Date &amp; Time</label>
+      <input type="text" id="ohDate" placeholder="e.g. Sat May 31, 1–4 PM"/>
+    </div>
+  </div>
+
+  <label class="fl">Expected Visitor Mix</label>
+  <select id="ohVisitor">
+    <option value="mixed families investors and curious neighbors">Mixed — Families, Investors &amp; Neighbors</option>
+    <option value="luxury buyers">Luxury Buyers Only</option>
+    <option value="first-time buyers">Mostly First-Time Buyers</option>
+    <option value="investment-focused buyers">Investment-Focused Buyers</option>
+  </select>
+
+  <button class="btn btn-gold" id="ohBtn" onclick="runOpenHouse()">🏡 Generate Open House Playbook</button>
+  <div class="lbox" id="ohLoading"><div class="spinner"></div><p>Building your open house playbook...</p></div>
+  <div id="ohResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 7 — TRANSACTION DEADLINE TRACKER
+══════════════════════════════════════════ -->
+<div id="panel-timeline" class="panel">
+<div class="card">
+  <div class="card-title">📅 Transaction Deadline Tracker <span class="badge-new">NEW</span></div>
+  <div class="card-desc">One missed deadline can kill your deal and cost you your license. Enter your dates — get every critical milestone color-coded with buffer alerts.</div>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Contract Acceptance Date</label>
+      <input type="date" id="tlContract"/>
+    </div>
+    <div>
+      <label class="fl">Target Closing Date</label>
+      <input type="date" id="tlClose"/>
+    </div>
+  </div>
+
+  <label class="fl">Loan / Transaction Type</label>
+  <select id="tlType">
+    <option value="conventional">Conventional Loan</option>
+    <option value="fha">FHA Loan</option>
+    <option value="va">VA Loan</option>
+    <option value="cash">Cash Purchase</option>
+    <option value="jumbo">Jumbo / Non-Conforming</option>
+  </select>
+
+  <label class="fl">State (affects timelines)</label>
+  <input type="text" id="tlState" placeholder="e.g. Georgia, Texas, Florida..."/>
+
+  <label class="fl" style="margin-bottom:10px;">Special Conditions</label>
+  <div class="row2">
+    <label class="ck-label"><input type="checkbox" id="tlHOA"/> HOA Approval Required</label>
+    <label class="ck-label"><input type="checkbox" id="tlSeptic"/> Septic Inspection Needed</label>
+  </div>
+
+  <button class="btn btn-gold" onclick="runTimeline()">📋 Generate Full Deadline Timeline</button>
+
+  <div id="tlOutput" style="display:none;">
+    <div class="dl-list" id="deadlineList"></div>
+    <div class="warn-box" style="margin-top:14px;">⚠️ <strong>Always verify</strong> these deadlines with your broker and title company. State laws and contract addenda can override standard timelines. All dates include a 1-day buffer.</div>
+  </div>
+
+  <div class="lbox" id="tlLoading"><div class="spinner"></div><p>Generating expert tips for your transaction...</p></div>
+  <div id="tlAIResults"></div>
+</div>
+</div>
+
+</main>
+<footer>THE DEAL CLOSER AI &nbsp;|&nbsp; <span>Full Arsenal Edition</span> &nbsp;|&nbsp; Powered by Claude AI</footer>
+<div id="toast">✅ Copied!</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════
+   NAVIGATION
+═══════════════════════════════ */
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('#mainNav button').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══════════════════════════════
+   TOAST / COPY
+═══════════════════════════════ */
+function showToast() {
+  var t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2000);
+}
+function copyText(txt) {
+  if (!txt) return;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(txt).then(showToast).catch(function(){ fallbackCopy(txt); });
+  } else {
+    fallbackCopy(txt);
+  }
+}
+function fallbackCopy(txt) {
+  var ta = document.createElement('textarea');
+  ta.value = txt;
+  ta.style.cssText = 'position:fixed;opacity:0;top:-999px;left:-999px;';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); showToast(); } catch(e) { alert('Copy failed — please select text manually.'); }
+  document.body.removeChild(ta);
+}
+
+/* ═══════════════════════════════
+   UI HELPERS
+═══════════════════════════════ */
+function showLoading(id) { document.getElementById(id).classList.add('show'); }
+function hideLoading(id) { document.getElementById(id).classList.remove('show'); }
+function disableBtn(id)  { var el = document.getElementById(id); if(el) el.disabled = true; }
+function enableBtn(id)   { var el = document.getElementById(id); if(el) el.disabled = false; }
+function clearEl(id)     { document.getElementById(id).innerHTML = ''; }
+function showEl(id)      { document.getElementById(id).style.display = 'block'; }
+function hideEl(id)      { document.getElementById(id).style.display = 'none'; }
+
+function showError(containerId, msg) {
+  document.getElementById(containerId).innerHTML =
+    '<div class="err-box">&#10060; ' + escHTML(msg) + '<br><small style="opacity:.7">Check your connection and try again.</small></div>';
+}
+
+function escHTML(str) {
+  return String(str || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═══════════════════════════════
+   SECTION CARD BUILDER
+   Uses a closure-based store so
+   copy buttons always have content
+═══════════════════════════════ */
+var _store = {};
+var _storeIdx = 0;
+
+function makeSection(title, content) {
+  var key = 'k' + (++_storeIdx);
+  var safeContent = content && content.trim() ? content.trim() : '(This section had no content — try regenerating.)';
+  _store[key] = safeContent;
+  return '<div class="section-result">' +
+    '<div class="sr-head"><span>' + title + '</span>' +
+    '<button class="btn btn-sm" onclick="copyText(_store[\'' + key + '\'])">Copy</button></div>' +
+    '<div class="sr-body">' + escHTML(safeContent) + '</div>' +
+    '</div>';
+}
+
+/* ═══════════════════════════════
+   AI API  (OpenAI-compatible, CORS-enabled)
+═══════════════════════════════ */
+var _AI_BASE = 'https://api.manus.im/api/llm-proxy/v1';
+var _AI_KEY  = 'sk-Kdc58KKRTPCFeJyiAdqqJN';
+var _AI_MODEL = 'gemini-2.5-flash';
+
+async function callClaude(systemPrompt, userPrompt, maxTokens) {
+  var tokens = maxTokens || 1800;
+  var res = await fetch(_AI_BASE + '/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + _AI_KEY
+    },
+    body: JSON.stringify({
+      model: _AI_MODEL,
+      max_tokens: tokens,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user',   content: userPrompt   }
+      ]
+    })
+  });
+  if (!res.ok) {
+    var errData = {};
+    try { errData = await res.json(); } catch(e) {}
+    var errMsg = (errData.error && errData.error.message) ? errData.error.message : ('HTTP error ' + res.status);
+    throw new Error(errMsg);
+  }
+  var data = await res.json();
+  if (!data.choices || !data.choices.length) throw new Error('No content returned from API.');
+  return data.choices[0].message.content || '';
+}
+
+/* ═══════════════════════════════
+   SECTION EXTRACTOR
+   Robust — handles both
+   [LABEL]: content  and
+   LABEL: content  formats
+═══════════════════════════════ */
+function extractSection(text, label) {
+  if (!text) return '';
+  // Try [LABEL] format first
+  var escapedLabel = label.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+  var re1 = new RegExp('\\[' + escapedLabel + '\\][ \\t]*:?[ \\t]*\\n?([\\s\\S]*?)(?=\\n\\s*\\[[A-Z]|$)', 'i');
+  var m = text.match(re1);
+  if (m && m[1].trim()) return m[1].trim();
+  // Try plain LABEL: format
+  var re2 = new RegExp('(?:^|\\n)[ \\t]*' + escapedLabel + '[ \\t]*:[ \\t]*\\n?([\\s\\S]*?)(?=\\n[A-Z][A-Z][A-Z ]+:|\\n\\[|$)', 'i');
+  m = text.match(re2);
+  if (m && m[1].trim()) return m[1].trim();
+  return '';
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 1 — COMMISSION CALCULATOR (real-time, no API)
+═══════════════════════════════════════════════════════ */
+function calcCommission() {
+  var price  = parseFloat(document.getElementById('salePrice').value)  || 0;
+  var rate   = parseFloat(document.getElementById('commRate').value)    || 0;
+  var list   = parseFloat(document.getElementById('listSplit').value)   || 50;
+  var agent  = parseFloat(document.getElementById('agentSplit').value)  || 80;
+  var fees   = parseFloat(document.getElementById('fees').value)        || 0;
+  var gross     = price * rate / 100;
+  var yourGross = gross * list / 100;
+  var afterBkr  = yourGross * agent / 100;
+  var net       = afterBkr - fees;
+  var fmt = function(v){ return '$' + Math.max(0, v).toLocaleString('en-US', { maximumFractionDigits: 0 }); };
+  document.getElementById('grossComm').textContent     = fmt(gross);
+  document.getElementById('yourSideGross').textContent = fmt(yourGross);
+  document.getElementById('afterBroker').textContent   = fmt(afterBkr);
+  document.getElementById('netTakeHome').textContent   = fmt(net);
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 2 — AI MARKETING ENGINE
+═══════════════════════════════════════════════════════ */
+async function runMarketing() {
+  var specs = document.getElementById('mktSpecs').value.trim();
+  var nbhd  = document.getElementById('mktNeighborhood').value.trim();
+  var price = document.getElementById('mktPrice').value.trim();
+  if (!specs) { alert('Please enter the property specs first.'); return; }
+
+  disableBtn('mktBtn');
+  showLoading('mktLoading');
+  clearEl('mktResults');
+
+  var system = 'You are a real estate marketing specialist with 40 years of experience and over $2 billion in sales. You have mastered SEO, social media, luxury positioning, and buyer psychology. Respond in plain text only. Do not use markdown, asterisks, pound signs, or bullet hyphens.';
+
+  var prompt = 'Property: ' + specs + '\n' +
+    'Neighborhood/Target Market: ' + (nbhd || 'not specified') + '\n' +
+    'Listing Price: ' + (price || 'not specified') + '\n\n' +
+    'Generate exactly 4 sections. Use these EXACT section labels on their own line:\n\n' +
+    '[SEO STRATEGY]\n' +
+    'Write 5 high-converting SEO keywords for this property, then write a 90-word SEO meta description optimized for Zillow, Realtor.com, and Google.\n\n' +
+    '[MARKET POSITIONING PITCH]\n' +
+    'Write a 100-word market positioning pitch for listing presentations. Why does this home beat its competition right now?\n\n' +
+    '[BUYER PROFIT ROI ANGLE]\n' +
+    'Write a 100-word buyer-facing ROI pitch. Include equity potential, rental comp value, and appreciation angle.\n\n' +
+    '[TIKTOK REEL SCRIPT]\n' +
+    'Write a complete 30-second TikTok/Instagram Reel script with a strong hook, compelling middle, and call to action. Include relevant emojis. Make it viral-worthy.';
+
+  try {
+    var raw = await callClaude(system, prompt, 1800);
+    var s1 = extractSection(raw, 'SEO STRATEGY');
+    var s2 = extractSection(raw, 'MARKET POSITIONING PITCH');
+    var s3 = extractSection(raw, 'BUYER PROFIT ROI ANGLE');
+    var s4 = extractSection(raw, 'TIKTOK REEL SCRIPT');
+    document.getElementById('mktResults').innerHTML =
+      makeSection('📊 SEO Strategy', s1 || raw) +
+      makeSection('🏆 Market Positioning Pitch', s2) +
+      makeSection('💰 Buyer ROI & Profit Angle', s3) +
+      makeSection('📹 TikTok / Reel Script', s4);
+  } catch(e) {
+    showError('mktResults', e.message);
+  }
+
+  hideLoading('mktLoading');
+  enableBtn('mktBtn');
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 3 — OFFER & COUNTER-OFFER GENERATOR
+═══════════════════════════════════════════════════════ */
+async function runOffer() {
+  var askRaw = document.getElementById('offerAsk').value.trim();
+  var offRaw = document.getElementById('offerPrice').value.trim();
+  if (!askRaw || !offRaw) { alert('Please enter both the asking price and the offer/counter price.'); return; }
+
+  var side  = document.getElementById('offerSide').value;
+  var ask   = parseFloat(askRaw);
+  var ofr   = parseFloat(offRaw);
+  var addr  = document.getElementById('offerAddr').value.trim() || 'the subject property';
+  var dom   = document.getElementById('offerDOM').value.trim()  || 'unknown';
+  var motiv = document.getElementById('offerMotivation').value;
+  var close = document.getElementById('offerClose').value.trim() || 'standard timeline';
+  var terms = document.getElementById('offerTerms').value.trim() || 'none';
+
+  var conts = [];
+  if (document.getElementById('contInspect').checked)   conts.push('Inspection');
+  if (document.getElementById('contFinance').checked)   conts.push('Financing');
+  if (document.getElementById('contAppraisal').checked) conts.push('Appraisal');
+  var contingencyStr = conts.length ? conts.join(', ') : 'No contingencies';
+
+  var diffPct = ask > 0 ? Math.abs(((ask - ofr) / ask) * 100).toFixed(1) : '0';
+  var diffDir = ofr < ask ? 'below asking' : (ofr > ask ? 'above asking' : 'at asking');
+
+  disableBtn('offerBtn');
+  showLoading('offerLoading');
+  clearEl('offerResults');
+
+  var system = 'You are a master real estate negotiator with 40 years of experience and over 3,000 closed transactions. You know every psychological and tactical lever in a real estate deal. You have coached hundreds of agents on negotiation. Respond in plain text only. No markdown, no asterisks, no pound signs.';
+
+  var prompt = 'I am representing the ' + side + '.\n' +
+    'Property: ' + addr + '\n' +
+    'List Price: $' + ask.toLocaleString() + '\n' +
+    'Offer/Counter Price: $' + ofr.toLocaleString() + ' (' + diffPct + '% ' + diffDir + ')\n' +
+    'Days on Market: ' + dom + '\n' +
+    'Contingencies: ' + contingencyStr + '\n' +
+    'Seller Motivation: ' + motiv + '\n' +
+    'Requested Closing: ' + close + '\n' +
+    'Special Terms: ' + terms + '\n\n' +
+    'Generate exactly 4 sections with these EXACT labels on their own lines:\n\n' +
+    '[NEGOTIATION STRATEGY]\n' +
+    'Write a 150-word expert negotiation playbook. What leverage do I have? What are the key risks? What is my opening move and fallback position? Be brutally specific.\n\n' +
+    '[OFFER LANGUAGE]\n' +
+    'Write the actual professional offer language to drop into a contract or email. Formal, specific, and airtight. Reference all contingencies and special terms listed above.\n\n' +
+    '[OBJECTION RESPONSES]\n' +
+    'Write 3 likely objections the other side will raise, each followed by my exact scripted response. Sharp, confident, and professional.\n\n' +
+    '[WALK AWAY POINT]\n' +
+    'Tell me exactly where my client\'s walk-away point should be and why, given all the facts above. Be specific with numbers.';
+
+  try {
+    var raw = await callClaude(system, prompt, 2000);
+    var s1 = extractSection(raw, 'NEGOTIATION STRATEGY');
+    var s2 = extractSection(raw, 'OFFER LANGUAGE');
+    var s3 = extractSection(raw, 'OBJECTION RESPONSES');
+    var s4 = extractSection(raw, 'WALK AWAY POINT');
+    document.getElementById('offerResults').innerHTML =
+      makeSection('⚔️ Negotiation Strategy', s1 || raw) +
+      makeSection('📄 Offer Language', s2) +
+      makeSection('🛡️ Objection Responses', s3) +
+      makeSection('🚪 Walk-Away Analysis', s4);
+  } catch(e) {
+    showError('offerResults', e.message);
+  }
+
+  hideLoading('offerLoading');
+  enableBtn('offerBtn');
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 4 — FOLLOW-UP EMAIL SEQUENCE
+═══════════════════════════════════════════════════════ */
+var _emails = [];
+
+async function runFollowUp() {
+  var leadType  = document.getElementById('fuLeadType').value;
+  var clientName= document.getElementById('fuName').value.trim()      || 'the client';
+  var situation = document.getElementById('fuSituation').value.trim() || 'interested buyer or seller, details not provided';
+  var agentName = document.getElementById('fuAgent').value.trim()     || 'Your Agent';
+  var tone      = document.getElementById('fuTone').value;
+
+  disableBtn('fuBtn');
+  showLoading('fuLoading');
+  hideEl('fuResults');
+  _emails = [];
+
+  var system = 'You are a top real estate agent with 40 years of experience and deep mastery of client psychology. You write emails that feel genuinely personal, never templated. Your sequences convert leads at 3x the industry average. Respond in plain text only. No markdown, no asterisks, no pound signs.';
+
+  // Use numbered delimiters that are highly reliable to parse
+  var prompt = 'Client name: ' + clientName + '\n' +
+    'Lead type: ' + leadType.replace(/_/g, ' ') + '\n' +
+    'Situation: ' + situation + '\n' +
+    'Agent name and brokerage: ' + agentName + '\n' +
+    'Tone: ' + tone + '\n\n' +
+    'Write a 5-email follow-up sequence. Format EXACTLY like this — each email must have these exact delimiter lines:\n\n' +
+    '===EMAIL1START===\n' +
+    'Subject: [write subject line here]\n' +
+    '[write email body here]\n' +
+    '===EMAIL1END===\n\n' +
+    '===EMAIL2START===\n' +
+    'Subject: [write subject line here]\n' +
+    '[write email body here]\n' +
+    '===EMAIL2END===\n\n' +
+    '(continue same pattern for emails 3, 4, 5)\n\n' +
+    'Email 1: Immediate reconnect — reference their specific situation, feel personal\n' +
+    'Email 2: Value-add — share a genuinely useful market insight or tip for their situation\n' +
+    'Email 3: Social proof — brief story about a similar client you helped successfully\n' +
+    'Email 4: Soft urgency — a real market condition or opportunity they might miss\n' +
+    'Email 5: Final clean check-in — no pressure, keeps the door open professionally\n\n' +
+    'Each email: 120-180 words. Make every email feel like a real human wrote it specifically for this client. No generic filler.';
+
+  try {
+    var raw = await callClaude(system, prompt, 2400);
+    // Parse with reliable delimiters
+    for (var i = 1; i <= 5; i++) {
+      var re = new RegExp('===EMAIL' + i + 'START===\\s*([\\s\\S]*?)===EMAIL' + i + 'END===', 'i');
+      var m = raw.match(re);
+      if (m) {
+        var block = m[1].trim();
+        var subMatch = block.match(/^Subject:\s*(.+)/im);
+        var subject = subMatch ? subMatch[1].trim() : 'Email ' + i;
+        var body = block.replace(/^Subject:\s*.+[\r\n]?/im, '').trim();
+        _emails.push({ num: i, subject: subject, body: body });
+      }
+    }
+    // Fallback if delimiters failed
+    if (_emails.length === 0) {
+      _emails.push({ num: 1, subject: 'Your Follow-Up Sequence', body: raw });
+    }
+    renderEmailTab(0);
+    showEl('fuResults');
+  } catch(e) {
+    hideEl('fuResults');
+    showError('fuLoading', e.message);
+    // Re-show error inside a visible area
+    document.getElementById('fuLoading').classList.remove('show');
+    document.getElementById('fuBtn').parentNode.insertAdjacentHTML('beforeend',
+      '<div class="err-box">&#10060; ' + escHTML(e.message) + '</div>');
+  }
+
+  hideLoading('fuLoading');
+  enableBtn('fuBtn');
+}
+
+function renderEmailTab(idx) {
+  if (!_emails.length) return;
+  idx = Math.min(Math.max(parseInt(idx, 10), 0), _emails.length - 1);
+  var e = _emails[idx];
+  // Render tabs
+  var tabsHTML = _emails.map(function(em, i){
+    return '<button class="etab' + (i === idx ? ' active' : '') + '" onclick="renderEmailTab(' + i + ')">Email ' + em.num + '</button>';
+  }).join('');
+  document.getElementById('emailTabs').innerHTML = tabsHTML;
+  // Counter
+  document.getElementById('emailCounter').textContent = 'Email ' + e.num + ' of ' + _emails.length;
+  // Body
+  document.getElementById('emailBody').textContent = 'Subject: ' + e.subject + '\n\n' + e.body;
+}
+
+function copyActiveEmail() {
+  var body = document.getElementById('emailBody').textContent;
+  copyText(body);
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 5 — LISTING DESCRIPTION GENERATOR
+═══════════════════════════════════════════════════════ */
+async function runListing() {
+  var features = document.getElementById('ldFeatures').value.trim();
+  if (!features) { alert('Please enter the property features.'); return; }
+
+  var bedBath  = document.getElementById('ldBedBath').value.trim() || 'not specified';
+  var sqft     = document.getElementById('ldSqft').value.trim();
+  var propType = document.getElementById('ldType').value;
+  var location = document.getElementById('ldLocation').value.trim() || 'desirable neighborhood';
+  var buyer    = document.getElementById('ldBuyer').value;
+  var listPrice= document.getElementById('ldPrice').value.trim()  || 'priced competitively';
+
+  disableBtn('ldBtn');
+  showLoading('ldLoading');
+  clearEl('ldResults');
+
+  var system = 'You are a master real estate copywriter with 40 years of experience. Your listing descriptions consistently sell homes faster and above asking price. You understand buyer psychology, SEO optimization for property platforms, and how to create emotional urgency in copy. Respond in plain text only. No markdown, no asterisks, no pound signs.';
+
+  var prompt = 'Property details:\n' +
+    'Beds/Baths: ' + bedBath + '\n' +
+    'Square Footage: ' + (sqft ? sqft + ' sqft' : 'not specified') + '\n' +
+    'Property Type: ' + propType + '\n' +
+    'Features and upgrades: ' + features + '\n' +
+    'Location highlights: ' + location + '\n' +
+    'Target buyer: ' + buyer + '\n' +
+    'Listing price: ' + listPrice + '\n\n' +
+    'Generate exactly 4 sections with these EXACT labels on their own lines:\n\n' +
+    '[MLS DESCRIPTION]\n' +
+    'Write a 200-250 word MLS listing description. Open with the single most emotionally compelling hook sentence. Build desire throughout. End with a strong call to action.\n\n' +
+    '[SHORT DESCRIPTION]\n' +
+    'Write a 75-word version for social media, flyers, and email blasts. Punchy and compelling.\n\n' +
+    '[HEADLINE OPTIONS]\n' +
+    'Write 5 compelling marketing headline options, numbered 1 through 5. These are for flyers, ads, and social posts.\n\n' +
+    '[SEO SCORE]\n' +
+    'Rate this listing description\'s SEO strength from 1 to 10. List the top 5 keywords naturally embedded in the description. Explain specifically what would push the score higher.';
+
+  try {
+    var raw = await callClaude(system, prompt, 2000);
+    var s1 = extractSection(raw, 'MLS DESCRIPTION');
+    var s2 = extractSection(raw, 'SHORT DESCRIPTION');
+    var s3 = extractSection(raw, 'HEADLINE OPTIONS');
+    var s4 = extractSection(raw, 'SEO SCORE');
+    document.getElementById('ldResults').innerHTML =
+      makeSection('📝 Full MLS Description (200–250 words)', s1 || raw) +
+      makeSection('📱 Short Version — Social / Flyers / Email', s2) +
+      makeSection('💡 Headline Options (5)', s3) +
+      makeSection('📊 SEO Strength Score & Keywords', s4);
+  } catch(e) {
+    showError('ldResults', e.message);
+  }
+
+  hideLoading('ldLoading');
+  enableBtn('ldBtn');
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 6 — OPEN HOUSE PLAYBOOK
+═══════════════════════════════════════════════════════ */
+async function runOpenHouse() {
+  var addr = document.getElementById('ohAddr').value.trim();
+  if (!addr) { alert('Please enter the property address.'); return; }
+
+  var highlights = document.getElementById('ohHighlights').value.trim() || 'great home in a desirable area';
+  var budget     = document.getElementById('ohBudget').value.trim()     || '300';
+  var visitor    = document.getElementById('ohVisitor').value;
+  var dateTime   = document.getElementById('ohDate').value.trim()       || 'this weekend';
+
+  disableBtn('ohBtn');
+  showLoading('ohLoading');
+  clearEl('ohResults');
+
+  var system = 'You are an elite real estate agent with 40 years of experience specializing in open house strategy. You have hosted over 4,000 open houses and convert leads at 3x the national average. You know instantly how to read visitors, qualify serious buyers, and convert tire-kickers. Respond in plain text only. No markdown, no asterisks, no pound signs.';
+
+  var prompt = 'Property: ' + addr + '\n' +
+    'Key Highlights: ' + highlights + '\n' +
+    'Budget: $' + budget + '\n' +
+    'Expected visitor type: ' + visitor + '\n' +
+    'Date and time: ' + dateTime + '\n\n' +
+    'Generate exactly 4 sections with these EXACT labels on their own lines:\n\n' +
+    '[BUDGET BREAKDOWN]\n' +
+    'Show how to allocate the $' + budget + ' budget for maximum ROI. Itemize staging items, food and drinks, signage, digital ads, and any other line items. Include specific dollar amounts for each. Make it practical and ready to execute.\n\n' +
+    '[AGENT SCRIPT]\n' +
+    'Write a complete word-for-word open house script including: warm greeting at the door, 3 property tour talking points that build desire, how to handle price objections without going below list, and the exact closing line that gets every visitor to give their contact info.\n\n' +
+    '[LEAD QUALIFICATION QUESTIONS]\n' +
+    'Write 6 questions to ask every visitor that reveal whether they are a real buyer, their timeline, their budget, and their true motivation — without feeling like an interrogation. Number them 1 through 6. Include a brief note on what each question reveals.\n\n' +
+    '[FOLLOW UP PLAN]\n' +
+    'Write 3 complete follow-up email templates:\n' +
+    'Template A: For a Serious Buyer — ready, pre-approved, high interest\n' +
+    'Template B: For an Undecided Maybe — showed interest but not committed\n' +
+    'Template C: For a Neighbor or Tire-Kicker — probably not buying but may refer someone\n' +
+    'Each template should be 80-100 words, ready to copy-paste.';
+
+  try {
+    var raw = await callClaude(system, prompt, 2200);
+    var s1 = extractSection(raw, 'BUDGET BREAKDOWN');
+    var s2 = extractSection(raw, 'AGENT SCRIPT');
+    var s3 = extractSection(raw, 'LEAD QUALIFICATION QUESTIONS');
+    var s4 = extractSection(raw, 'FOLLOW UP PLAN');
+    document.getElementById('ohResults').innerHTML =
+      makeSection('💵 Budget Breakdown & ROI Allocation', s1 || raw) +
+      makeSection('🎤 Complete Agent Script', s2) +
+      makeSection('🔍 Lead Qualification Questions', s3) +
+      makeSection('📬 Post-Event Follow-Up Templates (3 types)', s4);
+  } catch(e) {
+    showError('ohResults', e.message);
+  }
+
+  hideLoading('ohLoading');
+  enableBtn('ohBtn');
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOOL 7 — TRANSACTION DEADLINE TRACKER
+═══════════════════════════════════════════════════════ */
+function runTimeline() {
+  var contractVal = document.getElementById('tlContract').value;
+  var closeVal    = document.getElementById('tlClose').value;
+  var loanType    = document.getElementById('tlType').value;
+  var state       = document.getElementById('tlState').value.trim();
+  var hoa         = document.getElementById('tlHOA').checked;
+  var septic      = document.getElementById('tlSeptic').checked;
+
+  if (!contractVal) { alert('Please enter the contract acceptance date.'); return; }
+  if (!closeVal)    { alert('Please enter the target closing date.'); return; }
+
+  var contract  = new Date(contractVal + 'T12:00:00');
+  var closing   = new Date(closeVal    + 'T12:00:00');
+  var totalDays = Math.round((closing - contract) / 86400000);
+
+  if (totalDays <= 0) { alert('Closing date must be after the contract date.'); return; }
+  if (totalDays > 365) { alert('Timeline seems too long (over 1 year). Please check your dates.'); return; }
+
+  function addDays(base, n) {
+    var d = new Date(base.getTime());
+    d.setDate(d.getDate() + Math.min(n, totalDays));
+    return d;
+  }
+  function fmtDate(d) {
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  function dotCls(d) {
+    var diff = Math.round((d.getTime() - Date.now()) / 86400000);
+    if (diff < 0)  return 'dr';
+    if (diff <= 3) return 'dr';
+    if (diff <= 7) return 'da';
+    return 'dg';
+  }
+  function daysLbl(d) {
+    var diff = Math.round((d.getTime() - Date.now()) / 86400000);
+    if (diff < 0)   return Math.abs(diff) + 'd ago';
+    if (diff === 0) return 'TODAY ⚠️';
+    if (diff === 1) return '1 day left ⚠️';
+    return diff + ' days left';
+  }
+
+  var isCash    = loanType === 'cash';
+  var isVA      = loanType === 'va';
+  var isFHA     = loanType === 'fha';
+  var inspDays  = isCash ? 7  : 10;
+  var apprOrd   = isCash ? 0  : (isVA ? 18 : 14);
+  var apprDl    = isCash ? 0  : (isVA ? 25 : 21);
+  var loanCommit= isCash ? 0  : Math.round(totalDays * 0.72);
+  var titleDays = Math.round(totalDays * 0.42);
+
+  var ms = [];
+  ms.push({ label: '📋 Contract Acceptance',          date: contract,                     note: 'Day 0 — Start ALL clocks immediately.' });
+  if (!isCash) {
+    ms.push({ label: '📑 Loan Application Submitted', date: addDays(contract, 3),         note: 'Buyer must formally apply — do not let this drift past day 3.' });
+  }
+  ms.push({ label: '🔍 Inspection Period Deadline',   date: addDays(contract, inspDays),  note: inspDays + ' days — schedule inspection within 24 hrs of acceptance.' });
+  if (hoa) {
+    ms.push({ label: '🏘️ HOA Docs Requested',         date: addDays(contract, inspDays),  note: 'Request same day as inspection — boards are slow, budgets take time.' });
+  }
+  if (septic) {
+    ms.push({ label: '💧 Septic Inspection',           date: addDays(contract, inspDays + 2), note: 'Book immediately — certified inspectors book up fast.' });
+  }
+  if (!isCash) {
+    ms.push({ label: '📬 Appraisal Ordered',           date: addDays(contract, apprOrd),  note: 'Day ' + apprOrd + ' — order early, appraisers run 1-2 week backlogs.' });
+    ms.push({ label: '🏡 Appraisal Deadline',          date: addDays(contract, apprDl),   note: 'Day ' + apprDl + ' — a low value can kill the deal without a renegotiation clause.' });
+    ms.push({ label: '💳 Loan Commitment Deadline',   date: addDays(contract, loanCommit),note: 'Day ' + loanCommit + ' — lender must formally commit. Missing this can void the contract.' });
+  }
+  ms.push({ label: '📁 Title Search Cleared',          date: addDays(contract, titleDays), note: 'Day ' + titleDays + ' — any lien or cloud on title must be flagged and resolved now.' });
+  ms.push({ label: '🔐 Final Walkthrough',             date: addDays(contract, totalDays - 1), note: '24–48 hrs before closing — verify all agreed repairs completed, condition unchanged.' });
+  ms.push({ label: '💰 Wire Funds / Cashier\'s Check', date: addDays(contract, totalDays - 1), note: 'Always verify wire instructions by phone — wire fraud is rampant.' });
+  ms.push({ label: '🎉 CLOSING DAY',                   date: closing,                     note: 'The finish line — stay on schedule and celebrate your client!' });
+
+  // Sort by date
+  ms.sort(function(a, b){ return a.date.getTime() - b.date.getTime(); });
+
+  var html = ms.map(function(m){
+    return '<div class="dl-item">' +
+      '<div class="ddot ' + dotCls(m.date) + '"></div>' +
+      '<div style="flex:1"><div class="dlabel">' + m.label + '</div><div class="dnote">' + m.note + '</div></div>' +
+      '<div class="dright"><div class="ddate">' + fmtDate(m.date) + '</div><div class="ddays">' + daysLbl(m.date) + '</div></div>' +
+      '</div>';
+  }).join('');
+
+  document.getElementById('deadlineList').innerHTML = html;
+  showEl('tlOutput');
+
+  // Fire AI tips
+  getTimelineTips(loanType, state, totalDays, hoa, septic);
+}
+
+async function getTimelineTips(loanType, state, totalDays, hoa, septic) {
+  showLoading('tlLoading');
+  clearEl('tlAIResults');
+
+  var system = 'You are a real estate transaction coordinator and licensed broker with 40 years of experience and thousands of closed deals across all 50 states. Respond in plain text only. No markdown, no asterisks, no pound signs.';
+
+  var extras = [];
+  if (hoa)    extras.push('HOA approval required');
+  if (septic) extras.push('septic inspection needed');
+
+  var prompt = 'Transaction details:\n' +
+    'Loan type: ' + loanType + '\n' +
+    'State: ' + (state || 'not specified') + '\n' +
+    'Days from contract to close: ' + totalDays + '\n' +
+    (extras.length ? 'Special conditions: ' + extras.join(', ') + '\n' : '') +
+    '\nGenerate exactly 2 sections with these EXACT labels on their own lines:\n\n' +
+    '[EXPERT TIPS]\n' +
+    'Write 5 specific expert warnings and pro tips for this exact transaction type that most agents miss or overlook. Be brutally specific about what kills deals and what saves them. Number each tip 1 through 5.\n\n' +
+    '[AGENT CHECKLIST]\n' +
+    'Write a 10-item week-by-week action checklist for the agent from contract to close. Organize by timing (Week 1, Week 2, etc.). Number each item.';
+
+  try {
+    var raw = await callClaude(system, prompt, 1600);
+    var s1 = extractSection(raw, 'EXPERT TIPS');
+    var s2 = extractSection(raw, 'AGENT CHECKLIST');
+    document.getElementById('tlAIResults').innerHTML =
+      makeSection('🧠 Expert Tips for Your Transaction Type', s1 || raw) +
+      makeSection('✅ Agent Week-by-Week Action Checklist', s2);
+  } catch(e) {
+    document.getElementById('tlAIResults').innerHTML =
+      '<div class="err-box">Could not load AI tips: ' + escHTML(e.message) + '</div>';
+  }
+
+  hideLoading('tlLoading');
+}
+</script>
+</body>
+</html>
+
+
+<div style="max-width: 800px; margin: 40px auto; padding: 30px; background: linear-gradient(to bottom, #18181b, #000000); border: 2px solid #d4af37; border-radius: 12px; text-align: center; font-family: sans-serif; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+    <span style="font-size: 11px; font-family: monospace; color: #d4af37; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 8px;">⚜️ PREMIUM ENTERPRISE PLACEMENT</span>
+    <h3 style="font-size: 22px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0;">Want Absolute Local Market Monopoly?</h3>
+    <p style="font-size: 13px; color: #a1a1aa; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.6;">
+        We build completely automated local SEO infrastructure, execute advanced search keyword tracking, and manage full-scale marketing distribution campaigns for elite real estate firms.
+    </p>
+    <a href="https://docs.google.com/forms/d/1ofLBY7eHXGKhDoFuKb1zXgw7xuAZt-h6tzGuXfRSp68/preview" target="_blank" style="display: inline-block; padding: 10px 24px; background: transparent; border: 2px solid #d4af37; color: #d4af37; font-size: 12px; font-family: monospace; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; border-radius: 4px; transition: 0.2s;">
+        Apply for Dedicated Regional Management →
+    </a>
+</div>
+
+
+
+<div style="max-width: 800px; margin: 40px auto; padding: 30px; background: #d4af37; border: 2px solid #aa8423; border-radius: 12px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+    
+    <div style="display: inline-flex; align-items: center; background: #ffffff; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.1);">
+        <span style="width: 6px; height: 6px; background-color: #aa8423; border-radius: 50%; display: inline-block; margin-right: 8px;"></span>
+        <span style="font-size: 11px; font-family: monospace; color: #aa8423; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;">⚠️ LIMITED-TIME FOUNDING MEMBER ACCELERATOR</span>
+    </div>
+    
+    <h4 style="font-size: 26px; font-weight: 850; color: #000000; margin: 0 0 12px 0; letter-spacing: -0.5px; text-transform: uppercase;">Unlock Your Lifetime VIP Pass</h4>
+    
+    <div style="background: #111115; padding: 25px; border-radius: 8px; margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.15); text-align: center;">
+        <p style="font-size: 14px; color: #ffffff; max-width: 580px; margin: 0 auto 12px auto; line-height: 1.6; font-weight: 500;">
+            This is the ultimate vault deployment. Secure 100% unrestricted, permanent grandfather privileges to our entire master suite of AI conversion tools, closing matrices, and private business assets.
+        </p>
+        <p style="font-size: 12px; color: #a1a1aa; max-width: 520px; margin: 0 auto 0 auto; line-height: 1.5; font-style: italic;">
+            Notice: We are scaling this into a premium monthly recurring platform very soon. Lock in your permanent, one-time flat entry fee right now before this public link is permanently deactivated.
+        </p>
+    </div>
+    
+    <a href="https://buy.stripe.com/fZubJ2flGes75PHgVudwc00" target="_blank" style="display: inline-block; width: 100%; max-width: 340px; padding: 16px 24px; background-color: #000000; color: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; border-radius: 6px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: transform 0.2s; text-align: center;">
+        ⚡ Secure Lifetime Access — Only $5
+    </a>
+    
+    <span style="display: block; font-size: 11px; color: #000000; margin-top: 16px; font-family: monospace; font-weight: 700;">🔒 Insured PCI-Compliant 256-Bit Stripe Checkout</span>
+</div>
+
+
+
+
+<div style="max-width: 800px; margin: 30px auto; padding: 25px; background: #111115; border: 1px solid #27272a; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 4px 20px rgba(0,0,0,0.4); text-align: left;">
+    
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <span style="background: #d4af37; color: #000000; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; margin-right: 10px; letter-spacing: 0.5px;">PERRYMAN ASSETS ARCHITECTURE</span>
+        <h5 style="font-size: 15px; font-weight: 700; color: #ffffff; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">Verified Production Systems</h5>
+    </div>
+    
+    <p style="font-size: 13px; color: #a1a1aa; margin: 0 0 20px 0; line-height: 1.5;">
+        To deploy the matrices in our master vault at maximum scale, elite agents use the following standardized operational blueprints.
+    </p>
+
+    <div style="background: rgba(212, 175, 55, 0.03); border: 1px solid rgba(212, 175, 55, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+            <span style="font-size: 14px; font-weight: 600; color: #ffffff; display: block; margin-bottom: 4px;">🤖 Open-Source AI Script Automation Hub</span>
+            <span style="font-size: 12px; color: #71717a;">Deploy raw script models directly into standard industry AI engines for instant variation.</span>
+        </div>
+        <a href="https://chatgpt.com" target="_blank" style="padding: 8px 16px; background: #d4af37; color: #000000; font-size: 11px; font-weight: 700; text-decoration: none; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Launch Engine →</a>
+    </div>
+
+   
+
+<footer style="max-width: 800px; margin: 20px auto 40px auto; padding: 20px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <hr style="border: 0; border-top: 1px solid #27272a; margin-bottom: 20px;">
+    <p style="font-size: 12px; color: #71717a; line-height: 1.6; margin: 0 0 8px 0;">
+        © 2026 <strong>Perryman’s Assets, LLC</strong>. All Rights Reserved.
+    </p>
+    <p style="font-size: 11px; color: #52525b; max-width: 650px; margin: 0 auto; line-height: 1.5; text-align: justify; text-justify: inter-word;">
+        <strong>Disclaimer &amp; Terms:</strong> The digital tools, systems, frameworks, and matrices provided within this toolkit are for informational and business acceleration purposes only. Perryman’s Assets, LLC does not guarantee specific transaction volumes, income increases, or specific market performance. Unauthorized duplication, reverse-engineering, or digital scraping of this platform wrapper or its nested assets is strictly prohibited and will be prosecuted to the fullest extent of corporate trademark and property law. Transactions are securely managed off-site via PCI-Compliant Stripe architecture.
+    </p>
+</footer>
+
+
+
+  <script>
+    // Disables right-click context menu
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    
+    // Disables keyboard shortcuts for viewing source (Ctrl+U, Ctrl+Shift+I, F12)
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123) return false; // F12
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if (e.ctrlKey && e.shiftKey && e.charCodeAt(0) == 'C') return false;
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+    }
+</script>

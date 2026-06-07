@@ -1,0 +1,6 @@
+{
+  "name": "Perrymans Nexus-AI Real Estate Platform",
+  "description": "An enterprise multi-tenant PropTech platform for real estate agencies, featuring autonomous AI lead processing, meta ad automation, automated video walkthrough overlays, and mortgage partner tri-party nurture channels.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

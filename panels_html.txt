@@ -1,0 +1,319 @@
+<main>
+
+<!-- ════════���═════════════════════════════════
+     PANEL 1 — COMMISSION CALCULATOR
+══════════════════════════════════════════ -->
+<div id="panel-commission" class="panel active">
+<div class="card">
+  <div class="card-title">👑 Commission Split &amp; Net Sheet Calculator</div>
+  <div class="card-desc">Know your exact take-home on every deal before you hang up the phone. No more back-of-napkin math on closing day.</div>
+
+  <label class="fl">Property Sale Price ($)</label>
+  <input type="number" id="salePrice" placeholder="e.g. 485000" min="0" oninput="calcCommission()"/>
+
+  <label class="fl">Total Commission Rate (%)</label>
+  <input type="number" id="commRate" placeholder="e.g. 6" step="0.1" min="0" max="100" oninput="calcCommission()"/>
+
+  <label class="fl">Commission Split — Listing Side (%)</label>
+  <div class="row2">
+    <div>
+      <input type="number" id="listSplit" placeholder="Listing agent % (e.g. 50)" step="1" min="0" max="100" oninput="calcCommission()"/>
+    </div>
+    <div>
+      <input type="number" id="buySplit" placeholder="Buyer agent % (e.g. 50)" step="1" min="0" max="100" oninput="calcCommission()"/>
+    </div>
+  </div>
+
+  <label class="fl">Your Agent-to-Broker Split (you keep %)</label>
+  <input type="number" id="agentSplit" placeholder="e.g. 80" step="1" min="0" max="100" oninput="calcCommission()"/>
+
+  <label class="fl">Transaction Fees &amp; Other Costs ($)</label>
+  <input type="number" id="fees" placeholder="e.g. 350" min="0" oninput="calcCommission()"/>
+
+  <div class="stat-grid">
+    <div class="stat-box"><div class="stat-lbl">Gross Commission</div><div class="stat-val big" id="grossComm">$0</div></div>
+    <div class="stat-box"><div class="stat-lbl">Your Side Gross</div><div class="stat-val" id="yourSideGross">$0</div></div>
+    <div class="stat-box"><div class="stat-lbl">After Broker Split</div><div class="stat-val" id="afterBroker">$0</div></div>
+    <div class="stat-box"><div class="stat-lbl">Your Net Take-Home</div><div class="stat-val green" id="netTakeHome">$0</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 2 — MARKETING ENGINE
+══════════════════════════════════════════ -->
+<div id="panel-marketing" class="panel">
+<div class="card">
+  <div class="card-title">📣 AI Marketing &amp; Strategy Engine</div>
+  <div class="card-desc">Full specialist package: SEO strategy, market pitch, buyer ROI angle, and viral social script — all generated at once.</div>
+
+  <label class="fl">Property Specs &amp; Key Assets</label>
+  <textarea id="mktSpecs" placeholder="e.g. 4BR/3BA, 2,200 sqft, renovated kitchen, pool, corner lot, new roof 2023, 3-car garage..."></textarea>
+
+  <label class="fl">Target Market / Neighborhood</label>
+  <input type="text" id="mktNeighborhood" placeholder="e.g. Buckhead Atlanta, first-time buyers, luxury investors..."/>
+
+  <label class="fl">Listing Price</label>
+  <input type="text" id="mktPrice" placeholder="e.g. $525,000"/>
+
+  <button class="btn btn-gold" id="mktBtn" onclick="runMarketing()">⚡ Generate Full Strategy Package</button>
+  <div class="lbox" id="mktLoading"><div class="spinner"></div><p>Crafting your specialist strategy...</p></div>
+  <div id="mktResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 3 — OFFER & COUNTER-OFFER
+══════════════════════════════════════════ -->
+<div id="panel-offer" class="panel">
+<div class="card">
+  <div class="card-title">🤝 Offer &amp; Counter-Offer Generator <span class="badge-new">NEW</span></div>
+  <div class="card-desc">Complete negotiation playbook + professional offer language in 30 seconds. Gives any agent the leverage of a 40-year veteran on every deal.</div>
+
+  <label class="fl">You Are Representing</label>
+  <select id="offerSide">
+    <option value="buyer">The Buyer</option>
+    <option value="seller">The Seller</option>
+  </select>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Asking / List Price ($)</label>
+      <input type="number" id="offerAsk" placeholder="e.g. 499000" min="0"/>
+    </div>
+    <div>
+      <label class="fl">Offer / Counter Price ($)</label>
+      <input type="number" id="offerPrice" placeholder="e.g. 472000" min="0"/>
+    </div>
+  </div>
+
+  <label class="fl">Property Address / Description</label>
+  <input type="text" id="offerAddr" placeholder="e.g. 142 Maple St — 3BR/2BA ranch, 90 days on market"/>
+
+  <label class="fl">Days on Market</label>
+  <input type="number" id="offerDOM" placeholder="e.g. 47" min="0"/>
+
+  <label class="fl">Contingencies</label>
+  <div class="row3" style="margin-top:8px;">
+    <label class="ck-label"><input type="checkbox" id="contInspect" checked/> Inspection</label>
+    <label class="ck-label"><input type="checkbox" id="contFinance" checked/> Financing</label>
+    <label class="ck-label"><input type="checkbox" id="contAppraisal" checked/> Appraisal</label>
+  </div>
+
+  <label class="fl">Seller Motivation Level</label>
+  <select id="offerMotivation">
+    <option value="unknown">Unknown — Not sure</option>
+    <option value="low">Low — Testing the market</option>
+    <option value="medium">Medium — Ready to move in 60–90 days</option>
+    <option value="high">High — Needs to close fast</option>
+    <option value="distressed">Distressed — Pre-foreclosure / divorce / estate</option>
+  </select>
+
+  <label class="fl">Closing Timeline</label>
+  <input type="text" id="offerClose" placeholder="e.g. 30 days, 45 days, flexible"/>
+
+  <label class="fl">Special Terms or Concessions</label>
+  <textarea id="offerTerms" style="min-height:72px" placeholder="e.g. seller pays closing costs, include appliances, leaseback 30 days, as-is..."></textarea>
+
+  <button class="btn btn-gold" id="offerBtn" onclick="runOffer()">⚔️ Generate Negotiation Strategy + Offer Language</button>
+  <div class="lbox" id="offerLoading"><div class="spinner"></div><p>Building your negotiation playbook...</p></div>
+  <div id="offerResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 4 — FOLLOW-UP EMAIL SEQUENCE
+══════════════════════════════════════════ -->
+<div id="panel-followup" class="panel">
+<div class="card">
+  <div class="card-title">📧 Client Follow-Up Email Sequence <span class="badge-new">NEW</span></div>
+  <div class="card-desc">Stop losing deals to silence. Get a personalized 5-email drip sequence for any lead type — ready for your CRM in 60 seconds.</div>
+
+  <label class="fl">Lead Type</label>
+  <select id="fuLeadType">
+    <option value="first_time_buyer">First-Time Buyer</option>
+    <option value="move_up_buyer">Move-Up Buyer (selling + buying)</option>
+    <option value="investor">Real Estate Investor</option>
+    <option value="relocating">Corporate Relocation</option>
+    <option value="downsizer">Empty Nester / Downsizer</option>
+    <option value="seller_lead">Potential Seller Lead</option>
+    <option value="open_house_visitor">Open House Visitor</option>
+    <option value="cold_lead">Cold Lead (30+ days no contact)</option>
+  </select>
+
+  <label class="fl">Client Name(s)</label>
+  <input type="text" id="fuName" placeholder="e.g. Marcus &amp; Tanya"/>
+
+  <label class="fl">Their Situation (more detail = better emails)</label>
+  <textarea id="fuSituation" placeholder="e.g. Pre-approved for $420K, looking in Midtown, saw 3 homes last week, price is main concern, lease ends in 4 months..."></textarea>
+
+  <label class="fl">Your Name &amp; Brokerage</label>
+  <input type="text" id="fuAgent" placeholder="e.g. Keisha Williams, KW Metro"/>
+
+  <label class="fl">Sequence Tone</label>
+  <select id="fuTone">
+    <option value="warm professional">Warm &amp; Professional</option>
+    <option value="direct with urgency">Direct with Urgency</option>
+    <option value="consultative advisor">Consultative / Advisor</option>
+    <option value="casual and friendly">Casual &amp; Friendly</option>
+  </select>
+
+  <button class="btn btn-gold" id="fuBtn" onclick="runFollowUp()">✉️ Generate 5-Email Drip Sequence</button>
+  <div class="lbox" id="fuLoading"><div class="spinner"></div><p>Writing your personalized sequence...</p></div>
+
+  <div id="fuResults" style="display:none;">
+    <div class="email-tabs" id="emailTabs"></div>
+    <div class="email-box">
+      <div class="email-head">
+        <span id="emailCounter">Email 1 of 5</span>
+        <button class="btn btn-sm" onclick="copyActiveEmail()">Copy Email</button>
+      </div>
+      <div class="email-body" id="emailBody"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 5 — LISTING DESCRIPTION
+══════════════════════════════════════════ -->
+<div id="panel-listing" class="panel">
+<div class="card">
+  <div class="card-title">🏠 Listing Description Generator <span class="badge-new">NEW</span></div>
+  <div class="card-desc">MLS-optimized listing copy with SEO scoring. Turn 60 seconds of input into a description that stops scrollers and pulls the right buyer in.</div>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Beds / Baths</label>
+      <input type="text" id="ldBedBath" placeholder="e.g. 4BD / 3.5BA"/>
+    </div>
+    <div>
+      <label class="fl">Square Footage</label>
+      <input type="number" id="ldSqft" placeholder="e.g. 2450" min="0"/>
+    </div>
+  </div>
+
+  <label class="fl">Property Type</label>
+  <select id="ldType">
+    <option value="Single Family Home">Single Family Home</option>
+    <option value="Condo / Townhome">Condo / Townhome</option>
+    <option value="Luxury Estate">Luxury Estate</option>
+    <option value="Investment / Multi-family">Investment / Multi-family</option>
+    <option value="Land / Lot">Land / Lot</option>
+    <option value="Commercial Property">Commercial Property</option>
+  </select>
+
+  <label class="fl">Top Features &amp; Upgrades (list everything)</label>
+  <textarea id="ldFeatures" placeholder="e.g. Renovated chef's kitchen, quartz counters, SS appliances, primary suite with spa bath, 3-car garage, resort-style pool, smart home, corner lot, new HVAC 2023, hardwood floors throughout..."></textarea>
+
+  <label class="fl">Neighborhood &amp; Location Selling Points</label>
+  <input type="text" id="ldLocation" placeholder="e.g. Top-rated schools, walk to downtown, 5 min from I-285, gated community..."/>
+
+  <label class="fl">Target Buyer</label>
+  <select id="ldBuyer">
+    <option value="Growing Families">Growing Families</option>
+    <option value="Young Professionals">Young Professionals</option>
+    <option value="Luxury Buyers">Luxury Buyers</option>
+    <option value="Investors">Investors / ROI Focus</option>
+    <option value="Retirees and Downsizers">Retirees / Downsizers</option>
+    <option value="First-Time Buyers">First-Time Buyers</option>
+  </select>
+
+  <label class="fl">Listing Price</label>
+  <input type="text" id="ldPrice" placeholder="e.g. $649,000"/>
+
+  <button class="btn btn-gold" id="ldBtn" onclick="runListing()">✍️ Generate MLS Listing + SEO Score</button>
+  <div class="lbox" id="ldLoading"><div class="spinner"></div><p>Crafting your listing masterpiece...</p></div>
+  <div id="ldResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 6 — OPEN HOUSE PLAYBOOK
+══════════════════════════════════════════ -->
+<div id="panel-openhouse" class="panel">
+<div class="card">
+  <div class="card-title">🗝️ Open House ROI &amp; Script Builder <span class="badge-new">NEW</span></div>
+  <div class="card-desc">Stop winging it. Get a budget breakdown, word-for-word agent script, lead qualification questions, and post-visit follow-up emails — before you arrive at the door.</div>
+
+  <label class="fl">Property Address &amp; Type</label>
+  <input type="text" id="ohAddr" placeholder="e.g. 318 Oak Blvd — 4BR colonial, $549K, Roswell GA"/>
+
+  <label class="fl">Top 5 Property Highlights</label>
+  <textarea id="ohHighlights" style="min-height:72px" placeholder="e.g. Just renovated, new roof, best school district in county, huge backyard, priced $30K below comps..."></textarea>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Open House Budget ($)</label>
+      <input type="number" id="ohBudget" placeholder="e.g. 500" min="0"/>
+    </div>
+    <div>
+      <label class="fl">Date &amp; Time</label>
+      <input type="text" id="ohDate" placeholder="e.g. Sat May 31, 1–4 PM"/>
+    </div>
+  </div>
+
+  <label class="fl">Expected Visitor Mix</label>
+  <select id="ohVisitor">
+    <option value="mixed families investors and curious neighbors">Mixed — Families, Investors &amp; Neighbors</option>
+    <option value="luxury buyers">Luxury Buyers Only</option>
+    <option value="first-time buyers">Mostly First-Time Buyers</option>
+    <option value="investment-focused buyers">Investment-Focused Buyers</option>
+  </select>
+
+  <button class="btn btn-gold" id="ohBtn" onclick="runOpenHouse()">🏡 Generate Open House Playbook</button>
+  <div class="lbox" id="ohLoading"><div class="spinner"></div><p>Building your open house playbook...</p></div>
+  <div id="ohResults"></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PANEL 7 — TRANSACTION DEADLINE TRACKER
+══════════════════════════════════════════ -->
+<div id="panel-timeline" class="panel">
+<div class="card">
+  <div class="card-title">📅 Transaction Deadline Tracker <span class="badge-new">NEW</span></div>
+  <div class="card-desc">One missed deadline can kill your deal and cost you your license. Enter your dates — get every critical milestone color-coded with buffer alerts.</div>
+
+  <div class="row2">
+    <div>
+      <label class="fl">Contract Acceptance Date</label>
+      <input type="date" id="tlContract"/>
+    </div>
+    <div>
+      <label class="fl">Target Closing Date</label>
+      <input type="date" id="tlClose"/>
+    </div>
+  </div>
+
+  <label class="fl">Loan / Transaction Type</label>
+  <select id="tlType">
+    <option value="conventional">Conventional Loan</option>
+    <option value="fha">FHA Loan</option>
+    <option value="va">VA Loan</option>
+    <option value="cash">Cash Purchase</option>
+    <option value="jumbo">Jumbo / Non-Conforming</option>
+  </select>
+
+  <label class="fl">State (affects timelines)</label>
+  <input type="text" id="tlState" placeholder="e.g. Georgia, Texas, Florida..."/>
+
+  <label class="fl" style="margin-bottom:10px;">Special Conditions</label>
+  <div class="row2">
+    <label class="ck-label"><input type="checkbox" id="tlHOA"/> HOA Approval Required</label>
+    <label class="ck-label"><input type="checkbox" id="tlSeptic"/> Septic Inspection Needed</label>
+  </div>
+
+  <button class="btn btn-gold" onclick="runTimeline()">📋 Generate Full Deadline Timeline</button>
+
+  <div id="tlOutput" style="display:none;">
+    <div class="dl-list" id="deadlineList"></div>
+    <div class="warn-box" style="margin-top:14px;">⚠️ <strong>Always verify</strong> these deadlines with your broker and title company. State laws and contract addenda can override standard timelines. All dates include a 1-day buffer.</div>
+  </div>
+
+  <div class="lbox" id="tlLoading"><div class="spinner"></div><p>Generating expert tips for your transaction...</p></div>
+  <div id="tlAIResults"></div>
+</div>
+</div>
+
+</main>
