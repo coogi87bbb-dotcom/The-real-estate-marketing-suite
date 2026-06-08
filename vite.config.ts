@@ -4,8 +4,9 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
+  const isGithubActions = process.env.GITHUB_ACTIONS === "true";
   return {
-    base: "/The-real-estate-marketing-suite/",
+    base: isGithubActions ? "/The-real-estate-marketing-suite/" : "./",
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
